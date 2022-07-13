@@ -1,4 +1,4 @@
-Work in progress <br/>
+Work in progress, stay tuned! Will be awesome and useful software <br/>
 DEV Stack: NextJS, Typescript, Prisma, PostegreSQL, Next Auth
 
 <div>
