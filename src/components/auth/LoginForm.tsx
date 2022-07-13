@@ -18,7 +18,7 @@ import { signIn } from 'next-auth/react';
 
     const handleSignIn = async () => {
       await signIn('github', {
-        callbackUrl: 'http://localhost:3000/dashboard'
+        callbackUrl: 'http://localhost:3000/home'
       })
     }
     

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 
-const authRoutes = ["/dashboard"];
+const authRoutes = ["/home"];
 
 const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
     const session = useSession();
@@ -11,7 +11,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
 
     if (session.status === "loading") return null;
     if (router.pathname === '/' && session.status === 'authenticated') {
-        router.push('/dashboard')
+        router.push('/home')
         return null
     }
     return (

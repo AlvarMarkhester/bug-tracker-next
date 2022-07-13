@@ -1,0 +1,23 @@
+User:
+- ID
+- Name
+- Email
+- Image
+- Accounts
+- Session
+*- Projects
+
+Project:
+- ID
+- Name
+- UsersID
+*- Tickets
+
+Ticket:
+- ID
+- Name
+- Description
+- Date
+- Status
+- Priority
+- Owner
