@@ -10,7 +10,13 @@ import {
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React from "react";
 
-const Sidebar = ({selectedPage, setSelectedPage}: {selectedPage: string, setSelectedPage: React.Dispatch<React.SetStateAction<string>>}) => {
+const Sidebar = ({
+    selectedPage,
+    setSelectedPage,
+}: {
+    selectedPage: string;
+    setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
+}) => {
     return (
         <Flex
             bg={useColorModeValue("white", "gray.900")}
@@ -24,9 +30,15 @@ const Sidebar = ({selectedPage, setSelectedPage}: {selectedPage: string, setSele
             <VStack align={"start"} spacing={"5"}>
                 {NavItems.map((item, index) => (
                     <>
-                    {item.text === "Dashboard" ? <Divider/> : null}
-                    <SideNavItem key={index} text={item.text} icon={item.icon} selectedPage={selectedPage} setSelectedPage={setSelectedPage}/>
-                    <Divider colorScheme={'blue'}/>
+                        {item.text === "Dashboard" ? <Divider /> : null}
+                        <SideNavItem
+                            key={index}
+                            text={item.text}
+                            icon={item.icon}
+                            selectedPage={selectedPage}
+                            setSelectedPage={setSelectedPage}
+                        />
+                        <Divider colorScheme={"blue"} />
                     </>
                 ))}
             </VStack>
@@ -38,24 +50,34 @@ const SideNavItem = ({
     text,
     icon,
     selectedPage,
-    setSelectedPage
+    setSelectedPage,
 }: {
     text: string;
-    icon: import("@chakra-ui/system").ComponentWithAs<"svg", import("@chakra-ui/icon").IconProps>;
+    icon: import("@chakra-ui/system").ComponentWithAs<
+        "svg",
+        import("@chakra-ui/icon").IconProps
+    >;
     selectedPage: string;
-    setSelectedPage: React.Dispatch<React.SetStateAction<string>>
+    setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-    return(
-    <Box minH={"25px"} pl={'25px'} onClick={() => setSelectedPage(text)}>
-        <Text fontWeight={"bold"} color={(selectedPage === text) ? "blue.500" : undefined}>
-            <Icon as={icon} mr={3}/>
-            {text}
-        </Text>
-    </Box>
-)};
+    return (
+        <Box minH={"25px"} pl={"25px"} onClick={() => setSelectedPage(text)}>
+            <Text
+                fontWeight={"bold"}
+                color={selectedPage === text ? "blue.500" : undefined}
+            >
+                <Icon as={icon} mr={3} />
+                {text}
+            </Text>
+        </Box>
+    );
+};
 
 interface NavItem {
-    icon: import("@chakra-ui/system").ComponentWithAs<"svg", import("@chakra-ui/icon").IconProps>
+    icon: import("@chakra-ui/system").ComponentWithAs<
+        "svg",
+        import("@chakra-ui/icon").IconProps
+    >;
     text: string;
 }
 

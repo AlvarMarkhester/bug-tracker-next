@@ -53,9 +53,8 @@ model User {
   image           String?
   accounts        Account[]
   sessions        Session[]
-  projects        Project[]
+  projects        Project[] @relation("createdProjects")
   tickets         Ticket[]
-  createdProjects Project[] @relation("createdProjects")
 }
 
 model Project {
@@ -63,7 +62,6 @@ model Project {
   name     String
   author   User     @relation(name: "createdProjects", fields: [authorId], references: [id])
   authorId String
-  users    User[]
   tickets  Ticket[]
 }
 
