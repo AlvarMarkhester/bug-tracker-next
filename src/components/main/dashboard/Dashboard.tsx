@@ -1,13 +1,15 @@
 import {
-    Box,
     Flex,
     Text,
-    Divider,
     Grid,
     GridItem,
     Stack,
+    Button,
+    Input,
+    useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
+import Projects from "./Projects";
 
 const Dashboard = () => {
     return (
@@ -18,10 +20,10 @@ const Dashboard = () => {
                 templateColumns="repeat(5, 1fr)"
                 gap={4}
             >
-                <GridItem rowSpan={3} colSpan={1} bg="gray.700">
-                  <Text>Project</Text>
+                <GridItem rowSpan={3} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
+                    <Projects/>
                 </GridItem>
-                <GridItem colSpan={4} bg="gray.700">
+                <GridItem colSpan={4} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
                     <Stack
                         spacing={"20"}
                         direction={"row"}
@@ -43,7 +45,7 @@ const Dashboard = () => {
                                 textAlign={"center"}
                                 color={"blackAlpha.700"}
                                 fontWeight={"bold"}
-                                fontSize={'2xl'}
+                                fontSize={"2xl"}
                             >
                                 1
                             </Text>
@@ -68,7 +70,7 @@ const Dashboard = () => {
                                 textAlign={"center"}
                                 color={"blackAlpha.700"}
                                 fontWeight={"bold"}
-                                fontSize={'2xl'}
+                                fontSize={"2xl"}
                             >
                                 1
                             </Text>
@@ -93,7 +95,7 @@ const Dashboard = () => {
                                 textAlign={"center"}
                                 color={"blackAlpha.700"}
                                 fontWeight={"bold"}
-                                fontSize={'2xl'}
+                                fontSize={"2xl"}
                             >
                                 1
                             </Text>
@@ -118,7 +120,7 @@ const Dashboard = () => {
                                 textAlign={"center"}
                                 color={"blackAlpha.700"}
                                 fontWeight={"bold"}
-                                fontSize={'2xl'}
+                                fontSize={"2xl"}
                             >
                                 1
                             </Text>
@@ -143,7 +145,7 @@ const Dashboard = () => {
                                 textAlign={"center"}
                                 color={"blackAlpha.700"}
                                 fontWeight={"bold"}
-                                fontSize={'2xl'}
+                                fontSize={"2xl"}
                             >
                                 1
                             </Text>
@@ -157,17 +159,17 @@ const Dashboard = () => {
                         </Flex>
                     </Stack>
                 </GridItem>
-                <GridItem colSpan={1} rowSpan={2} bg="gray.700">
-                  <Text align={'center'}>Tickets by priority</Text>
+                <GridItem colSpan={1} rowSpan={2} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
+                    <Text align={"center"}>Tickets by priority</Text>
                 </GridItem>
-                <GridItem colSpan={1} rowSpan={2} bg="gray.700">
-                <Text align={'center'}>Tickets by owner</Text>
+                <GridItem colSpan={1} rowSpan={2} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
+                    <Text align={"center"}>Tickets by owner</Text>
                 </GridItem>
-                <GridItem colSpan={1} rowSpan={2} bg="gray.700">
-                <Text align={'center'}>Tickets by status</Text>
+                <GridItem colSpan={1} rowSpan={2} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
+                    <Text align={"center"}>Tickets by status</Text>
                 </GridItem>
-                <GridItem colSpan={1} rowSpan={2} bg="gray.700">
-                <Text align={'center'}>Note board</Text>
+                <GridItem colSpan={1} rowSpan={2} bg={useColorModeValue("white", "gray.700")} borderRadius={'10px'}>
+                    <Text align={"center"}>Note board</Text>
                 </GridItem>
             </Grid>
         </Flex>
