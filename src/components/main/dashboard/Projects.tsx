@@ -4,11 +4,12 @@ import {
     Text,
     Input,
     Button,
-    Box,
     Icon,
     Divider,
+    VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useProjectContext } from "../../../context/ProjectContext";
 
 interface IProjects {
     name: string;
@@ -24,7 +25,7 @@ const Projects = ({
     setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
 }) => {
     const [newProjectName, setNewProjectName] = useState("");
-    const [projects, setProjects] = useState<IProjects[]>([]);
+    const { allProjects } = useProjectContext();
 
     const createProject = async () => {
         if (newProjectName === "") return;
@@ -40,21 +41,6 @@ const Projects = ({
         }
     };
 
-    useEffect(() => {
-        const getUserProjects = async () => {
-            try {
-                await fetch("/api/projects", {
-                    method: "GET",
-                })
-                    .then((res) => res.json())
-                    .then((data) => setProjects(data.projects));
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getUserProjects();
-    }, []);
-
     const handleSelect = (project: string) => {
         setSelectedProject(project);
     };
@@ -67,7 +53,7 @@ const Projects = ({
                 fontWeight="bold"
                 textDecoration="underline"
             >
-                Add new project
+                Create a new project
             </Text>
             <Flex p={"20px"}>
                 <Input
@@ -90,11 +76,10 @@ const Projects = ({
                 </Text>
             </Flex>
 
-            <Flex p="10px">
+            <VStack>
                 <Button
-                    w="300px"
+                    w="80%"
                     fontWeight="bold"
-                    bg="transparent"
                     onClick={() => handleSelect("AllProjects")}
                     color={
                         selectedProject === "AllProjects"
@@ -105,14 +90,12 @@ const Projects = ({
                     <Icon as={HamburgerIcon} mr={3} />
                     All projects
                 </Button>
-            </Flex>
 
-            {projects.map((data, index) => {
-                return (
-                    <Flex key={index} p="5px">
+                {allProjects.map((data: any, index: any) => {
+                    return (
                         <Button
-                            w="300px"
-                            bg="transparent"
+                            key={index}
+                            w="80%"
                             onClick={() => handleSelect(data.id)}
                             color={
                                 selectedProject === data.id
@@ -122,9 +105,9 @@ const Projects = ({
                         >
                             {data.name}
                         </Button>
-                    </Flex>
-                );
-            })}
+                    );
+                })}
+            </VStack>
         </>
     );
 };

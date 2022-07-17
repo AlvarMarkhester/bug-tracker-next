@@ -1,14 +1,16 @@
 import {
-    Box,
     Flex,
     VStack,
     useColorModeValue,
     Icon,
+    Button,
+    Select,
     Text,
-    Divider,
+    Divider
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React from "react";
+import { useProjectContext } from "../../context/ProjectContext";
 
 const Sidebar = ({
     selectedPage,
@@ -27,10 +29,9 @@ const Sidebar = ({
             h={"100%"}
             direction={"column"}
         >
-            <VStack align={"start"} spacing={"5"}>
+            <VStack align={"start"} spacing={"5"} p="20px">
                 {NavItems.map((item, index) => (
                     <>
-                        {item.text === "Dashboard" ? <Divider /> : null}
                         <SideNavItem
                             key={index}
                             text={item.text}
@@ -38,13 +39,47 @@ const Sidebar = ({
                             selectedPage={selectedPage}
                             setSelectedPage={setSelectedPage}
                         />
-                        <Divider colorScheme={"blue"} />
                     </>
                 ))}
+                {(selectedPage === "Tasks") && <Divider />}
+                {(selectedPage === "Tasks") && <SideNavSelectProject />}
+                {(selectedPage === "Tasks") && <AddNewTask />}
             </VStack>
         </Flex>
     );
 };
+
+const AddNewTask = () => {
+    return (
+        <Button>Add new task</Button>
+    )
+}
+
+const SideNavSelectProject = () => {
+    const { currentProject, setCurrentProject, allProjects } =
+        useProjectContext();
+    
+    return (
+        <Flex direction={"column"} width="100%">
+        <Text align="center">Selected project:</Text>
+        <Select
+            onChange={(evt) => setCurrentProject(evt.currentTarget.value)}
+            value={currentProject}
+        >
+            <option disabled selected value=""> -- Select an option -- </option>
+            {allProjects.map((data: any) => {
+                return (
+                    <option key={data.id} value={data.name}>
+                        {data.name}
+                    </option>
+                );
+            })}
+        </Select>
+        </Flex>     
+    );
+};
+
+
 
 const SideNavItem = ({
     text,
@@ -61,15 +96,15 @@ const SideNavItem = ({
     setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
     return (
-        <Box minH={"25px"} pl={"25px"} onClick={() => setSelectedPage(text)}>
-            <Text
-                fontWeight={"bold"}
-                color={selectedPage === text ? "blue.500" : undefined}
-            >
-                <Icon as={icon} mr={3} />
-                {text}
-            </Text>
-        </Box>
+        <Button
+            onClick={() => setSelectedPage(text)}
+            width="100%"
+            fontWeight={"bold"}
+            color={selectedPage === text ? "blue.500" : undefined}
+        >
+            <Icon as={icon} mr={3} />
+            {text}
+        </Button>
     );
 };
 
