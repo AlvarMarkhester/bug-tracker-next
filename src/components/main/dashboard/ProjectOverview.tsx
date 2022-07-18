@@ -19,8 +19,8 @@ const ProjectOverview = ({
         >
             <Flex
                 bg={"green.400"}
-                width={"100px"}
-                height={"100px"}
+                width={"120px"}
+                height={"120px"}
                 borderRadius={"15px"}
                 direction={"column"}
                 justifyContent={"center"}
@@ -39,13 +39,13 @@ const ProjectOverview = ({
                     color={"blackAlpha.700"}
                     fontWeight={"bold"}
                 >
-                    Open bugs
+                    Open tickets
                 </Text>
             </Flex>
             <Flex
                 bg={"teal.400"}
-                width={"100px"}
-                height={"100px"}
+                width={"120px"}
+                height={"120px"}
                 borderRadius={"15px"}
                 direction={"column"}
                 justifyContent={"center"}
@@ -64,13 +64,13 @@ const ProjectOverview = ({
                     color={"blackAlpha.700"}
                     fontWeight={"bold"}
                 >
-                    Closed bugs
+                    Closed tickets
                 </Text>
             </Flex>
             <Flex
                 bg={"red.400"}
-                width={"100px"}
-                height={"100px"}
+                width={"120px"}
+                height={"120px"}
                 borderRadius={"15px"}
                 direction={"column"}
                 justifyContent={"center"}
@@ -94,8 +94,8 @@ const ProjectOverview = ({
             </Flex>
             <Flex
                 bg={"yellow.200"}
-                width={"100px"}
-                height={"100px"}
+                width={"120px"}
+                height={"120px"}
                 borderRadius={"15px"}
                 direction={"column"}
                 justifyContent={"center"}
@@ -119,8 +119,8 @@ const ProjectOverview = ({
             </Flex>
             <Flex
                 bg={"green.200"}
-                width={"100px"}
-                height={"100px"}
+                width={"120px"}
+                height={"120px"}
                 borderRadius={"15px"}
                 direction={"column"}
                 justifyContent={"center"}

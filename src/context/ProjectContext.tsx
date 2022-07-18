@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const initialState: ProjectContextType = {
     currentProject: "",
     allProjects: [],
-    setCurrentProject: () => {},
+    setCurrentProject: () => { },
 };
 
 type ProjectContextType = {
@@ -20,7 +20,6 @@ const ProjectProvider = ({ children }: { children: React.ReactNode }) => {
 
     const setCurrentProject = (name: string) => {
         setProject(name);
-        console.log(name);
     };
 
     useEffect(() => {

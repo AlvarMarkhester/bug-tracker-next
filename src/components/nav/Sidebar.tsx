@@ -11,6 +11,17 @@ import {
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useProjectContext } from "../../context/ProjectContext";
+import { useDisclosure } from "@chakra-ui/react";
+import { Modal } from "@chakra-ui/react";
+import { ModalContent } from "@chakra-ui/react";
+import { ModalHeader } from "@chakra-ui/react";
+import { ModalCloseButton } from "@chakra-ui/react";
+import { ModalBody } from "@chakra-ui/react";
+import { ModalFooter } from "@chakra-ui/react";
+import { ModalOverlay } from "@chakra-ui/react";
+import { FormControl } from "@chakra-ui/react";
+import { FormLabel } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 const Sidebar = ({
     selectedPage,
@@ -50,32 +61,63 @@ const Sidebar = ({
 };
 
 const AddNewTask = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <Button>Add new task</Button>
+        <>
+            <Button onClick={onOpen}>Add new ticket</Button>
+
+            <NewTaskModal isOpen={isOpen} onClose={onClose} />
+        </>
+
+
     )
+}
+
+const NewTaskModal = ({ isOpen, onClose }: {isOpen: boolean, onClose: () => void}) => {
+    return (
+        <Modal isOpen={isOpen} onClose={onClose} size="xl">
+            <ModalOverlay />
+            <ModalContent padding="20px">
+                <ModalHeader>Add a new ticket</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                </ModalBody>
+                    <FormControl>
+                        <FormLabel>Enter your new task name:</FormLabel>
+                        <Input type="name"/>
+                    </FormControl>
+                <ModalFooter>
+                    <Button colorScheme='blue' mr={3} onClick={onClose}>
+                        Close
+                    </Button>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
+    );
+
 }
 
 const SideNavSelectProject = () => {
     const { currentProject, setCurrentProject, allProjects } =
         useProjectContext();
-    
+
     return (
         <Flex direction={"column"} width="100%">
-        <Text align="center">Selected project:</Text>
-        <Select
-            onChange={(evt) => setCurrentProject(evt.currentTarget.value)}
-            value={currentProject}
-        >
-            <option disabled selected value=""> -- Select an option -- </option>
-            {allProjects.map((data: any) => {
-                return (
-                    <option key={data.id} value={data.name}>
-                        {data.name}
-                    </option>
-                );
-            })}
-        </Select>
-        </Flex>     
+            <Text align="center">Selected project:</Text>
+            <Select
+                onChange={(evt) => setCurrentProject(evt.currentTarget.value)}
+                value={currentProject}
+            >
+                <option disabled selected value=""> -- Select an option -- </option>
+                {allProjects.map((data: any) => {
+                    return (
+                        <option key={data.id} value={data.name}>
+                            {data.name}
+                        </option>
+                    );
+                })}
+            </Select>
+        </Flex>
     );
 };
 
@@ -89,8 +131,8 @@ const SideNavItem = ({
 }: {
     text: string;
     icon: import("@chakra-ui/system").ComponentWithAs<
-        "svg",
-        import("@chakra-ui/icon").IconProps
+    "svg",
+    import("@chakra-ui/icon").IconProps
     >;
     selectedPage: string;
     setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
@@ -110,8 +152,8 @@ const SideNavItem = ({
 
 interface NavItem {
     icon: import("@chakra-ui/system").ComponentWithAs<
-        "svg",
-        import("@chakra-ui/icon").IconProps
+    "svg",
+    import("@chakra-ui/icon").IconProps
     >;
     text: string;
 }
