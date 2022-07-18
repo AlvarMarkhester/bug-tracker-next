@@ -52,9 +52,9 @@ const Sidebar = ({
                         />
                     </>
                 ))}
-                {(selectedPage === "Tasks") && <Divider />}
-                {(selectedPage === "Tasks") && <SideNavSelectProject />}
-                {(selectedPage === "Tasks") && <AddNewTask />}
+                {(selectedPage === "Tickets") && <Divider />}
+                {(selectedPage === "Tickets") && <SideNavSelectProject />}
+                {(selectedPage === "Tickets") && <AddNewTask />}
             </VStack>
         </Flex>
     );
@@ -165,7 +165,7 @@ const NavItems: Array<NavItem> = [
     },
     {
         icon: WarningIcon,
-        text: "Tasks",
+        text: "Tickets",
     },
     {
         icon: ChatIcon,
