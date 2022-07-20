@@ -17,7 +17,6 @@ import { ModalContent } from "@chakra-ui/react";
 import { ModalHeader } from "@chakra-ui/react";
 import { ModalCloseButton } from "@chakra-ui/react";
 import { ModalBody } from "@chakra-ui/react";
-import { ModalFooter } from "@chakra-ui/react";
 import { ModalOverlay } from "@chakra-ui/react";
 import { FormControl } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
@@ -73,7 +72,7 @@ const AddNewTask = () => {
     )
 }
 
-const NewTaskModal = ({ isOpen, onClose }: {isOpen: boolean, onClose: () => void}) => {
+const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay />
@@ -81,16 +80,17 @@ const NewTaskModal = ({ isOpen, onClose }: {isOpen: boolean, onClose: () => void
                 <ModalHeader>Add a new ticket</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                </ModalBody>
                     <FormControl>
                         <FormLabel>Enter your new task name:</FormLabel>
-                        <Input type="name"/>
+                        <Input type="name" />
+                        <FormLabel>Describe type of task:</FormLabel>
+                        <Input type="description"></Input>
+                        
+
                     </FormControl>
-                <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={onClose}>
-                        Close
-                    </Button>
-                </ModalFooter>
+
+                </ModalBody>
+
             </ModalContent>
         </Modal>
     );

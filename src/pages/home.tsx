@@ -14,7 +14,7 @@ const Home = () => {
         switch (page) {
             case "Dashboard":
                 return <Dashboard />;
-            case "Tasks":
+            case "Tickets":
                 return <Tasks />;
             case "Discussion":
                 return <Discussion />;
