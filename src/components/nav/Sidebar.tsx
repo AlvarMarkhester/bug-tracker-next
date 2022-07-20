@@ -11,16 +11,6 @@ import {
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useProjectContext } from "../../context/ProjectContext";
-import { useDisclosure } from "@chakra-ui/react";
-import { Modal } from "@chakra-ui/react";
-import { ModalContent } from "@chakra-ui/react";
-import { ModalHeader } from "@chakra-ui/react";
-import { ModalCloseButton } from "@chakra-ui/react";
-import { ModalBody } from "@chakra-ui/react";
-import { ModalOverlay } from "@chakra-ui/react";
-import { FormControl } from "@chakra-ui/react";
-import { FormLabel } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
 
 const Sidebar = ({
     selectedPage,
