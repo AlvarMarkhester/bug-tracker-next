@@ -57,12 +57,13 @@ const Projects = ({
             </Text>
             <Flex p={"20px"}>
                 <Input
+                    size="sm"
                     value={newProjectName}
                     onChange={(evt) =>
                         setNewProjectName(evt.currentTarget.value)
                     }
                 ></Input>
-                <Button onClick={createProject}>Add</Button>
+                <Button onClick={createProject} size="sm">Add</Button>
             </Flex>
             <Divider />
             <Flex justifyContent="center" py="20px">
@@ -81,6 +82,7 @@ const Projects = ({
                     w="80%"
                     fontWeight="bold"
                     onClick={() => handleSelect("AllProjects")}
+                    size="sm"
                     color={
                         selectedProject === "AllProjects"
                             ? "blue.500"
@@ -95,6 +97,7 @@ const Projects = ({
                     return (
                         <Button
                             key={index}
+                            size="sm"
                             w="80%"
                             onClick={() => handleSelect(data.id)}
                             color={

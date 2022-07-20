@@ -53,49 +53,12 @@ const Sidebar = ({
                 ))}
                 {(selectedPage === "Tickets") && <Divider />}
                 {(selectedPage === "Tickets") && <SideNavSelectProject />}
-                {(selectedPage === "Tickets") && <AddNewTask />}
             </VStack>
         </Flex>
     );
 };
 
-const AddNewTask = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    return (
-        <>
-            <Button onClick={onOpen}>Add new ticket</Button>
 
-            <NewTaskModal isOpen={isOpen} onClose={onClose} />
-        </>
-
-
-    )
-}
-
-const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
-    return (
-        <Modal isOpen={isOpen} onClose={onClose} size="xl">
-            <ModalOverlay />
-            <ModalContent padding="20px">
-                <ModalHeader>Add a new ticket</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <FormControl>
-                        <FormLabel>Enter your new task name:</FormLabel>
-                        <Input type="name" />
-                        <FormLabel>Describe type of task:</FormLabel>
-                        <Input type="description"></Input>
-                        
-
-                    </FormControl>
-
-                </ModalBody>
-
-            </ModalContent>
-        </Modal>
-    );
-
-}
 
 const SideNavSelectProject = () => {
     const { currentProject, setCurrentProject, allProjects } =
