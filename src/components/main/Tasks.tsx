@@ -1,5 +1,5 @@
 import { Flex, Grid, GridItem, useColorModeValue, Text, Button, VStack, useDisclosure, ModalFooter, Textarea } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "@chakra-ui/react";
 import { ModalContent } from "@chakra-ui/react";
 import { ModalHeader } from "@chakra-ui/react";
@@ -10,9 +10,19 @@ import { FormControl } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
+import { useProjectContext } from "../../context/ProjectContext";
 
 
 const Tasks = () => {
+    const { currentProject } = useProjectContext();
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [modalType, setModalType] = useState("")
+    const openModal = (type: string) => {
+        setModalType(type)
+        onOpen()
+    }
+    if (currentProject === "") return <Text>Please select a project</Text>
+
     return (
         <>
             <Flex p={'10px'} w={'100%'}>
@@ -24,41 +34,37 @@ const Tasks = () => {
                 >
                     <GridItem rowSpan={2} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={"10px"}>
                         <Text align={"center"} bg="red.300" borderTopRadius={"10px"} borderBottomRadius={useColorModeValue("10px", undefined)}>Backlog</Text>
-                        <AddNewTask />
+                        <Button width="100%" height="20px" onClick={() => openModal("Backlog")}>+</Button>
                     </GridItem>
                     <GridItem rowSpan={2} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={"10px"}>
                         <Text align={"center"} bg="yellow.300" borderTopRadius={"10px"} borderBottomRadius={useColorModeValue("10px", undefined)}>Todo</Text>
-                        <AddNewTask />
+                        <Button width="100%" height="20px" onClick={() => openModal("Todo")}>+</Button>
                     </GridItem>
                     <GridItem rowSpan={2} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={"10px"}>
                         <Text align={"center"} bg="teal.400" borderTopRadius={"10px"} borderBottomRadius={useColorModeValue("10px", undefined)}>In progress</Text>
-                        <AddNewTask />
+                        <Button width="100%" height="20px" onClick={() => openModal("Progress")}>+</Button>
                     </GridItem>
                     <GridItem rowSpan={2} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={"10px"}>
                         <Text align={"center"} bg="green.200" borderTopRadius={"10px"} borderBottomRadius={useColorModeValue("10px", undefined)}>Code Review</Text>
-                        <AddNewTask />
+                        <Button width="100%" height="20px" onClick={() => openModal("Review")}>+</Button>
                     </GridItem>
                     <GridItem rowSpan={2} colSpan={1} bg={useColorModeValue("white", "gray.700")} borderRadius={"10px"}>
                         <Text align={"center"} bg="green.400" borderTopRadius={"10px"} borderBottomRadius={useColorModeValue("10px", undefined)}>Finished</Text>
-                        <AddNewTask />
+                        <Button width="100%" height="20px" onClick={() => openModal("Finished")}>+</Button>
                     </GridItem>
                 </Grid>
             </Flex>
+            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType} currentProject={currentProject} />
         </>
     );
 };
 
-const AddNewTask = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    return (
-        <>
-            <Button width="100%" height="20px" onClick={onOpen}>+</Button>
-            <NewTaskModal isOpen={isOpen} onClose={onClose} />
-        </>
-    )
-}
+const NewTaskModal = ({ isOpen, onClose, type, currentProject }: { isOpen: boolean, onClose: () => void, type: string, currentProject: string }) => {
 
-const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+    const newTicketSubmit = () => {
+        console.log("submitted")
+    }
+
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay />
@@ -66,13 +72,14 @@ const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                 <ModalHeader>New ticket</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <FormControl isRequired>
+                    <FormControl isRequired onSubmit={newTicketSubmit}>
                         <FormLabel>Task name:</FormLabel>
                         <Input type="name" />
                         <FormLabel>Description:</FormLabel>
                         <Textarea></Textarea>
                         <FormLabel>Priority:</FormLabel>
                         <Select>
+                            <option defaultValue=""></option>
                             <option>Low</option>
                             <option>Mid</option>
                             <option>High</option>
@@ -84,13 +91,10 @@ const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                             size="md"
                             type="datetime-local"
                         />
+                        <Button type="submit">Submit</Button>
                     </FormControl>
 
                 </ModalBody>
-                <ModalFooter>
-                    <Button>Submit</Button>
-                </ModalFooter>
-
             </ModalContent>
         </Modal>
     );

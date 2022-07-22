@@ -33,7 +33,7 @@ const Sidebar = ({
                 {NavItems.map((item, index) => (
                     <>
                         <SideNavItem
-                            key={index}
+                            key={item.text}
                             text={item.text}
                             icon={item.icon}
                             selectedPage={selectedPage}
@@ -61,7 +61,7 @@ const SideNavSelectProject = () => {
                 onChange={(evt) => setCurrentProject(evt.currentTarget.value)}
                 value={currentProject}
             >
-                <option disabled selected value=""> -- Select an option -- </option>
+                <option disabled value="">Select a project</option>
                 {allProjects.map((data: any) => {
                     return (
                         <option key={data.id} value={data.name}>
