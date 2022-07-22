@@ -59,7 +59,8 @@ const Tasks = () => {
 
 const NewTaskModal = ({ isOpen, onClose, type, currentProject }: { isOpen: boolean, onClose: () => void, type: string, currentProject: string }) => {
 
-    const newTicketSubmit = () => {
+    const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+        evt.preventDefault()
         console.log("submitted")
     }
 
@@ -70,28 +71,31 @@ const NewTaskModal = ({ isOpen, onClose, type, currentProject }: { isOpen: boole
                 <ModalHeader>New ticket</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <FormControl isRequired onSubmit={newTicketSubmit}>
-                        <FormLabel>Task name:</FormLabel>
-                        <Input type="name" />
-                        <FormLabel>Description:</FormLabel>
-                        <Textarea></Textarea>
-                        <FormLabel>Priority:</FormLabel>
-                        <Select>
-                            <option defaultValue=""></option>
-                            <option>Low</option>
-                            <option>Mid</option>
-                            <option>High</option>
-                            <option>Critical</option>
-                        </Select>
-                        <FormLabel>Deadline:</FormLabel>
-                        <Input
-                            placeholder="Deadline Date and Time"
-                            size="md"
-                            type="datetime-local"
-                        />
-                        <Button type="submit">Submit</Button>
-                    </FormControl>
-
+                    <form onSubmit={newTicketSubmit}>
+                        <FormControl isRequired>
+                            <VStack spacing={2} align="start">
+                                <FormLabel>Task name:</FormLabel>
+                                <Input type="name" />
+                                <FormLabel>Description:</FormLabel>
+                                <Textarea></Textarea>
+                                <FormLabel>Priority:</FormLabel>
+                                <Select>
+                                    <option defaultValue=""></option>
+                                    <option>Low</option>
+                                    <option>Mid</option>
+                                    <option>High</option>
+                                    <option>Critical</option>
+                                </Select>
+                                <FormLabel>Deadline:</FormLabel>
+                                <Input
+                                    placeholder="Deadline Date and Time"
+                                    size="md"
+                                    type="datetime-local"
+                                />
+                                <Button type="submit">Submit</Button>
+                            </VStack>
+                        </FormControl>
+                    </form>
                 </ModalBody>
             </ModalContent>
         </Modal>

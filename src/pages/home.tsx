@@ -12,13 +12,13 @@ const Home = () => {
     return (
         <ProjectProvider>
             <Flex h={"100%"}>
-            <Sidebar
+                <Sidebar
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                 />
-                {(selectedPage === "Dashboard") && <Dashboard/>}
-                {(selectedPage === "Tickets") && <Tasks/>}
-                {(selectedPage === "Discussion") && <Discussion/>}
+                {(selectedPage === "Dashboard") && <Dashboard />}
+                {(selectedPage === "Tickets") && <Tasks />}
+                {(selectedPage === "Discussion") && <Discussion />}
             </Flex>
         </ProjectProvider>
     );

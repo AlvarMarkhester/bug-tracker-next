@@ -30,7 +30,7 @@ const Sidebar = ({
             direction={"column"}
         >
             <VStack align={"start"} spacing={"5"} p="20px">
-                {NavItems.map((item, index) => (
+                {NavItems.map((item) => (
                     <>
                         <SideNavItem
                             key={item.text}
