@@ -1,4 +1,4 @@
-import { Flex, Grid, GridItem, useColorModeValue, Text, Button, VStack, useDisclosure } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, useColorModeValue, Text, Button, VStack, useDisclosure, ModalFooter, Textarea } from "@chakra-ui/react";
 import React from "react";
 import { Modal } from "@chakra-ui/react";
 import { ModalContent } from "@chakra-ui/react";
@@ -9,6 +9,8 @@ import { ModalOverlay } from "@chakra-ui/react";
 import { FormControl } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
+
 
 const Tasks = () => {
     return (
@@ -50,8 +52,8 @@ const AddNewTask = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-        <Button width="100%" height="20px" onClick={onOpen}>+</Button>
-        <NewTaskModal isOpen={isOpen} onClose={onClose} />
+            <Button width="100%" height="20px" onClick={onOpen}>+</Button>
+            <NewTaskModal isOpen={isOpen} onClose={onClose} />
         </>
     )
 }
@@ -61,18 +63,33 @@ const NewTaskModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay />
             <ModalContent padding="20px">
-                <ModalHeader>Add a new ticket</ModalHeader>
+                <ModalHeader>New ticket</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <FormControl>
-                        <FormLabel>Enter your new task name:</FormLabel>
+                    <FormControl isRequired>
+                        <FormLabel>Task name:</FormLabel>
                         <Input type="name" />
-                        <FormLabel>Describe type of task:</FormLabel>
-                        <Input type="description"></Input>
-
+                        <FormLabel>Description:</FormLabel>
+                        <Textarea></Textarea>
+                        <FormLabel>Priority:</FormLabel>
+                        <Select>
+                            <option>Low</option>
+                            <option>Mid</option>
+                            <option>High</option>
+                            <option>Critical</option>
+                        </Select>
+                        <FormLabel>Deadline:</FormLabel>
+                        <Input
+                            placeholder="Deadline Date and Time"
+                            size="md"
+                            type="datetime-local"
+                        />
                     </FormControl>
 
                 </ModalBody>
+                <ModalFooter>
+                    <Button>Submit</Button>
+                </ModalFooter>
 
             </ModalContent>
         </Modal>
