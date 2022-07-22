@@ -24,8 +24,9 @@ const Projects = ({
     selectedProject: string;
     setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-    const [newProjectName, setNewProjectName] = useState("");
     const { allProjects } = useProjectContext();
+    const [newProjectName, setNewProjectName] = useState("");
+
 
     const createProject = async () => {
         if (newProjectName === "") return;

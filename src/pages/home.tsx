@@ -8,27 +8,17 @@ import { ProjectProvider } from "../context/ProjectContext";
 
 const Home = () => {
     const [selectedPage, setSelectedPage] = useState("Dashboard");
-    
-
-    const pageSelector = (page: string) => {
-        switch (page) {
-            case "Dashboard":
-                return <Dashboard />;
-            case "Tickets":
-                return <Tasks />;
-            case "Discussion":
-                return <Discussion />;
-        }
-    };
 
     return (
         <ProjectProvider>
             <Flex h={"100%"}>
-                <Sidebar
+            <Sidebar
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                 />
-                {pageSelector(selectedPage)}
+                {(selectedPage === "Dashboard") && <Dashboard/>}
+                {(selectedPage === "Tickets") && <Tasks/>}
+                {(selectedPage === "Discussion") && <Discussion/>}
             </Flex>
         </ProjectProvider>
     );

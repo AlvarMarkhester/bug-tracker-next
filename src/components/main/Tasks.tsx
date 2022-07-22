@@ -21,8 +21,6 @@ const Tasks = () => {
         setModalType(type)
         onOpen()
     }
-    if (currentProject === "") return <Text>Please select a project</Text>
-
     return (
         <>
             <Flex p={'10px'} w={'100%'}>
