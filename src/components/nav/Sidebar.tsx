@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
+import { useProjects } from "../../hooks/useProjects";
 
 const Sidebar = ({
     selectedPage,
@@ -30,15 +31,13 @@ const Sidebar = ({
         >
             <VStack align={"start"} spacing={"5"} p="20px">
                 {NavItems.map((item) => (
-                    <>
-                        <SideNavItem
-                            key={item.text}
-                            text={item.text}
-                            icon={item.icon}
-                            selectedPage={selectedPage}
-                            setSelectedPage={setSelectedPage}
-                        />
-                    </>
+                    <SideNavItem
+                        key={item.text}
+                        text={item.text}
+                        icon={item.icon}
+                        selectedPage={selectedPage}
+                        setSelectedPage={setSelectedPage}
+                    />
                 ))}
                 {(selectedPage === "Tickets") && <Divider />}
                 {(selectedPage === "Tickets") && <SideNavSelectProject />}
@@ -50,7 +49,9 @@ const Sidebar = ({
 
 
 const SideNavSelectProject = () => {
- const [currentProject, setCurrentProject] = useState("")
+    const [currentProject, setCurrentProject] = useState("")
+    const { status, data, error, isFetching } = useProjects();
+
     return (
         <Flex direction={"column"} width="100%">
             <Text align="center">Selected project:</Text>
@@ -59,7 +60,7 @@ const SideNavSelectProject = () => {
                 value={currentProject}
             >
                 <option disabled value="">Select a project</option>
-                {allProjects.map((data: any) => {
+                {data.map((data: any) => {
                     return (
                         <option key={data.id} value={data.name}>
                             {data.name}

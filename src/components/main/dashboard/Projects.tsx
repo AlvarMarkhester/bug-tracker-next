@@ -8,14 +8,8 @@ import {
     Divider,
     VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { useProjectContext } from "../../../context/ProjectContext";
-
-interface IProjects {
-    name: string;
-    id: string;
-    authorId: string;
-}
+import React, { useState } from "react";
+import { useProjects } from "../../../hooks/useProjects";
 
 const Projects = ({
     selectedProject,
@@ -24,8 +18,8 @@ const Projects = ({
     selectedProject: string;
     setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-    const { allProjects } = useProjectContext();
     const [newProjectName, setNewProjectName] = useState("");
+    const { status, data, error, isFetching } = useProjects();
 
 
     const createProject = async () => {
@@ -94,10 +88,10 @@ const Projects = ({
                     All projects
                 </Button>
 
-                {allProjects.map((data: any, index: any) => {
+                {data.map((data: any, index: any) => {
                     return (
                         <Button
-                            key={index}
+                            key={data.id}
                             size="sm"
                             w="80%"
                             onClick={() => handleSelect(data.id)}
