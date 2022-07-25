@@ -39,6 +39,7 @@ const Projects = ({
     const handleSelect = (project: string) => {
         setSelectedProject(project);
     };
+    console.log(data)
 
     return (
         <>
@@ -87,8 +88,7 @@ const Projects = ({
                     <Icon as={HamburgerIcon} mr={3} />
                     All projects
                 </Button>
-
-                {data.map((data: any, index: any) => {
+                {data?.projects?.map((data: any, index: any) => {
                     return (
                         <Button
                             key={data.id}
@@ -105,6 +105,7 @@ const Projects = ({
                         </Button>
                     );
                 })}
+                
             </VStack>
         </>
     );

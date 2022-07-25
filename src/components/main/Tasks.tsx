@@ -10,11 +10,9 @@ import { FormControl } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
-import { useProjectContext } from "../../context/ProjectContext";
 
 
 const Tasks = () => {
-    const { currentProject } = useProjectContext();
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [modalType, setModalType] = useState("")
     const openModal = (type: string) => {
@@ -52,12 +50,12 @@ const Tasks = () => {
                     </GridItem>
                 </Grid>
             </Flex>
-            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType} currentProject={currentProject} />
+            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType}/>
         </>
     );
 };
 
-const NewTaskModal = ({ isOpen, onClose, type, currentProject }: { isOpen: boolean, onClose: () => void, type: string, currentProject: string }) => {
+const NewTaskModal = ({ isOpen, onClose, type}: { isOpen: boolean, onClose: () => void, type: string}) => {
 
     const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()

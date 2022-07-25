@@ -60,7 +60,7 @@ const SideNavSelectProject = () => {
                 value={currentProject}
             >
                 <option disabled value="">Select a project</option>
-                {data.map((data: any) => {
+                {data?.projects?.map((data: any) => {
                     return (
                         <option key={data.id} value={data.name}>
                             {data.name}
