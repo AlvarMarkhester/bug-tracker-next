@@ -9,8 +9,7 @@ import {
     Divider
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
-import React from "react";
-import { useProjectContext } from "../../context/ProjectContext";
+import React, { useState } from "react";
 
 const Sidebar = ({
     selectedPage,
@@ -51,9 +50,7 @@ const Sidebar = ({
 
 
 const SideNavSelectProject = () => {
-    const { currentProject, setCurrentProject, allProjects } =
-        useProjectContext();
-
+ const [currentProject, setCurrentProject] = useState("")
     return (
         <Flex direction={"column"} width="100%">
             <Text align="center">Selected project:</Text>

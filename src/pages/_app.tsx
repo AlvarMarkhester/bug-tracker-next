@@ -5,21 +5,27 @@ import { SessionProvider } from "next-auth/react";
 import AuthWrapper from "../components/auth/AuthWrapper";
 import Navbar from "../components/nav/Navbar";
 import { ModalProvider } from "../context/ModalContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (
-        <ChakraProvider>
-            <SessionProvider session={session}>
-                <AuthWrapper>
-                    <ModalProvider>
-                        <Flex h={'100vh'} direction={'column'}>
-                            <Navbar />
-                            <Component {...pageProps} />
-                        </Flex>
-                    </ModalProvider>
-                </AuthWrapper>
-            </SessionProvider>
-        </ChakraProvider>
+        <QueryClientProvider client={queryClient}>
+            <ChakraProvider>
+                <SessionProvider session={session}>
+                    <AuthWrapper>
+                        <ModalProvider>
+                            <Flex h={'100vh'} direction={'column'}>
+                                <Navbar />
+                                <Component {...pageProps} />
+                            </Flex>
+                        </ModalProvider>
+                    </AuthWrapper>
+                </SessionProvider>
+            </ChakraProvider>
+        </QueryClientProvider>
+
     );
 }
 
