@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useProjects } from "../../../hooks/useProjects";
+import NewProjectModal from "./NewProjectModal";
 
 const Projects = ({
     selectedProject,
@@ -18,49 +19,15 @@ const Projects = ({
     selectedProject: string;
     setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-    const [newProjectName, setNewProjectName] = useState("");
     const { status, data, error, isFetching } = useProjects();
-
-
-    const createProject = async () => {
-        if (newProjectName === "") return;
-        try {
-            const body = { name: newProjectName };
-            await fetch("/api/project", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-            }).then(() => setNewProjectName(""));
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     const handleSelect = (project: string) => {
         setSelectedProject(project);
     };
-    console.log(data)
 
     return (
         <>
-            <Text
-                textAlign={"center"}
-                pt={"10px"}
-                fontWeight="bold"
-                textDecoration="underline"
-            >
-                Create a new project
-            </Text>
-            <Flex p={"20px"}>
-                <Input
-                    size="sm"
-                    value={newProjectName}
-                    onChange={(evt) =>
-                        setNewProjectName(evt.currentTarget.value)
-                    }
-                ></Input>
-                <Button onClick={createProject} size="sm">Add</Button>
-            </Flex>
+            <NewProjectModal />
             <Divider />
             <Flex justifyContent="center" py="20px">
                 <Text
@@ -105,7 +72,7 @@ const Projects = ({
                         </Button>
                     );
                 })}
-                
+
             </VStack>
         </>
     );
