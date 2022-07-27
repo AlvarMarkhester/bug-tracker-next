@@ -10,6 +10,8 @@ import { FormControl } from "@chakra-ui/react";
 import { FormLabel } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 
 const Tasks = () => {
@@ -50,12 +52,13 @@ const Tasks = () => {
                     </GridItem>
                 </Grid>
             </Flex>
-            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType}/>
+            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType} />
         </>
     );
 };
 
-const NewTaskModal = ({ isOpen, onClose, type}: { isOpen: boolean, onClose: () => void, type: string}) => {
+const NewTaskModal = ({ isOpen, onClose, type }: { isOpen: boolean, onClose: () => void, type: string }) => {
+    const { data } = useSession();
 
     const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
@@ -90,6 +93,19 @@ const NewTaskModal = ({ isOpen, onClose, type}: { isOpen: boolean, onClose: () =
                                     size="md"
                                     type="datetime-local"
                                 />
+                                <FormLabel>Asignee:</FormLabel>
+                                {data?.user?.image && data.user.name ? (
+                                    <>
+                                        <Image
+                                            src={data.user.image}
+                                            alt={data.user.name}
+                                            width={40}
+                                            height={40}
+                                            style={{ borderRadius: "50%" }}
+                                        />
+                                        <Text>{data.user.name}</Text>
+                                    </>
+                                ) : null}
                                 <Button type="submit">Submit</Button>
                             </VStack>
                         </FormControl>
