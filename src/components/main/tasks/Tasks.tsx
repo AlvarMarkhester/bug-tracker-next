@@ -40,11 +40,9 @@ const Tasks = () => {
                     </GridItem>
                 </Grid>
             </Flex>
-            <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType} />
+            {isOpen ? <NewTaskModal isOpen={isOpen} onClose={onClose} type={modalType} /> : null}
         </>
     );
 };
-
-
 
 export default Tasks;
