@@ -1,4 +1,4 @@
-import { Button, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure, VStack } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -49,8 +49,11 @@ const NewProjectForm = ({ isOpen, onClose}: { isOpen: boolean, onClose: () => vo
                             <VStack align="start">
                                 <FormLabel>Enter the project name:</FormLabel>
                                 <Input type="name" onChange={(e) => setNewProjectName(e.currentTarget.value)} value={newProjectName} />
-                                <Button type="submit" colorScheme={"blue"}>Submit</Button>
                             </VStack>
+                            <ModalFooter>
+                                <Button type="submit">Submit</Button>
+
+                            </ModalFooter>
                         </FormControl>
                     </form>
                 </ModalBody>

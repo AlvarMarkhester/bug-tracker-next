@@ -2,8 +2,6 @@ import { Flex, Grid, GridItem, useColorModeValue, Text, Button, VStack, useDiscl
 import React, { useState } from "react";
 import NewTaskModal from "./NewTaskModal";
 
-
-
 const Tasks = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [modalType, setModalType] = useState("")

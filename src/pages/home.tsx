@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../components/nav/Sidebar";
 import { Flex } from "@chakra-ui/react";
 import Dashboard from "../components/main/dashboard/Dashboard";
-import Tasks from "../components/main/Tasks";
+import Tasks from "../components/main/tasks/Tasks";
 import Discussion from "../components/main/Discussion";
 
 const Home = () => {
