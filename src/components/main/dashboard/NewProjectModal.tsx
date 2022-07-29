@@ -40,14 +40,14 @@ const NewProjectForm = ({ isOpen, onClose}: { isOpen: boolean, onClose: () => vo
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="md">
             <ModalOverlay />
-            <ModalContent padding="20px">
-                <ModalHeader>New project</ModalHeader>
+            <ModalContent paddingY="20px">
+                <ModalHeader>Create new project</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <form onSubmit={newProjectSubmit}>
                         <FormControl isRequired>
-                            <VStack spacing={4} align="start">
-                                <FormLabel>Project Name:</FormLabel>
+                            <VStack align="start">
+                                <FormLabel>Enter the project name:</FormLabel>
                                 <Input type="name" onChange={(e) => setNewProjectName(e.currentTarget.value)} value={newProjectName} />
                                 <Button type="submit" colorScheme={"blue"}>Submit</Button>
                             </VStack>

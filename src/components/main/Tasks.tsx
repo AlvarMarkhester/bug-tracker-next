@@ -94,18 +94,21 @@ const NewTaskModal = ({ isOpen, onClose, type }: { isOpen: boolean, onClose: () 
                                     type="datetime-local"
                                 />
                                 <FormLabel>Asignee:</FormLabel>
-                                {data?.user?.image && data.user.name ? (
-                                    <>
-                                        <Image
-                                            src={data.user.image}
-                                            alt={data.user.name}
-                                            width={40}
-                                            height={40}
-                                            style={{ borderRadius: "50%" }}
-                                        />
-                                        <Text>{data.user.name}</Text>
-                                    </>
-                                ) : null}
+                                <Flex align={"center"}>
+                                    {data?.user?.image && data.user.name ? (
+                                        <>
+                                            <Image
+                                                src={data.user.image}
+                                                alt={data.user.name}
+                                                width={40}
+                                                height={40}
+                                                style={{ borderRadius: "50%" }}
+                                            />
+                                            <Text pl={2}>{data.user.name}</Text>
+                                        </>
+                                    ) : null}
+                                </Flex>
+
                                 <Button type="submit">Submit</Button>
                             </VStack>
                         </FormControl>
