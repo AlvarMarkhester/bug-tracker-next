@@ -52,7 +52,6 @@ const NewProjectForm = ({ isOpen, onClose}: { isOpen: boolean, onClose: () => vo
                             </VStack>
                             <ModalFooter>
                                 <Button type="submit">Submit</Button>
-
                             </ModalFooter>
                         </FormControl>
                     </form>

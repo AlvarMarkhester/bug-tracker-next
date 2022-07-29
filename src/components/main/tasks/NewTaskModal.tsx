@@ -1,4 +1,4 @@
-import { Button, Flex, Modal, ModalFooter } from "@chakra-ui/react";
+import { Button, Modal, ModalFooter } from "@chakra-ui/react";
 import { ModalContent } from "@chakra-ui/react";
 import { ModalHeader } from "@chakra-ui/react";
 import { ModalCloseButton } from "@chakra-ui/react";
@@ -8,17 +8,39 @@ import { FormControl } from "@chakra-ui/react";
 import { FormLabel, Textarea, Text, VStack } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { useState } from "react";
 
-const NewTaskModal = ({ isOpen, onClose, type }: { isOpen: boolean, onClose: () => void, type: string }) => {
+const NewTaskModal = ({ isOpen, onClose, taskStatus }: { isOpen: boolean, onClose: () => void, taskStatus: string }) => {
     const [taskName, setTaskName] = useState("");
     const [taskDesc, setTaskDesc] = useState("");
     const [taskPrio, setTaskPrio] = useState("");
     const [taskDeadline, setTaskDeadline] = useState("")
 
+    const mutation = useMutation((newTask: {
+        taskName: string,
+        taskDesc: string,
+        taskPrio: string,
+        taskDeadline: string,
+        taskStatus: string
+    }) => {
+        return axios.post('api/ticket', newTask)
+    }, {
+        onMutate: () => {
+            setTaskName("")
+            setTaskDesc("")
+            setTaskPrio("")
+            setTaskDeadline("")
+        },
+        onSuccess: () => {
+            onClose()
+        }
+    })
     const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault()
-        console.log({ taskName, taskDesc, taskPrio, taskDeadline })
+        mutation.mutate({ taskName, taskDesc, taskPrio, taskDeadline, taskStatus })
+
     }
 
     return (
