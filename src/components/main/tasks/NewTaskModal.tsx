@@ -41,12 +41,6 @@ const NewTaskModal = ({
         },
         {
             onMutate: () => {
-                console.log({taskName: taskName,
-                    taskDesc: taskDesc,
-                    taskPrio: taskPrio,
-                    taskDeadline: taskDeadline,
-                    taskStatus: taskStatus,
-                    selectedProject: selectedProject})
                 setTaskName("");
                 setTaskDesc("");
                 setTaskPrio("");

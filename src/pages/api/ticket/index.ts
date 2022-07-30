@@ -21,7 +21,7 @@ export default async function handler(
         data: {
             name: taskName,
             desc: taskDesc,
-            date: new Date(taskDeadline), 
+            deadline: new Date(taskDeadline), 
             status: taskStatus,
             priority: taskPrio,
             author: { connect: { email: session?.user?.email! } },

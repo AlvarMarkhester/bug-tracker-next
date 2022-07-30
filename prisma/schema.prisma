@@ -69,11 +69,11 @@ model Ticket {
   id        String   @id @default(cuid())
   name      String
   desc      String?
-  date      DateTime
+  deadline  DateTime
   status    String
   priority  String
   author    User     @relation("createdTickets", fields: [authorId], references: [id])
   authorId  String
-  project   Project @relation("projectTickets", fields: [projectId], references: [id])
+  project   Project  @relation("projectTickets", fields: [projectId], references: [id])
   projectId String
 }
