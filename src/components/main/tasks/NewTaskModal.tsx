@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { useSelectedProjectContext } from "../../../context/SelectedProjectContext";
+import { ITicket } from "../../../ts/ticket";
 
 const NewTaskModal = ({
     isOpen,
@@ -29,15 +30,8 @@ const NewTaskModal = ({
     const {selectedProject} = useSelectedProjectContext();
 
     const mutation = useMutation(
-        (newTask: {
-            taskName: string;
-            taskDesc: string;
-            taskPrio: string;
-            taskDeadline: string;
-            taskStatus: string;
-            selectedProject: string;
-        }) => {
-            return axios.post("api/ticket", newTask);
+        (newTicket: ITicket) => {
+            return axios.post("api/ticket", newTicket);
         },
         {
             onMutate: () => {

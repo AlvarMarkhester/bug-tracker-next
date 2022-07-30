@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import { prisma } from "../../../lib/prisma";
+import { ITicket } from "../../../ts/ticket";
 
 export default async function handler(
     req: NextApiRequest,
@@ -15,13 +16,13 @@ export default async function handler(
         taskDeadline,
         taskStatus,
         selectedProject,
-    } = req.body;
+    }: ITicket = req.body;
 
     const result = await prisma.ticket.create({
         data: {
             name: taskName,
             desc: taskDesc,
-            deadline: new Date(taskDeadline), 
+            deadline: new Date(taskDeadline),
             status: taskStatus,
             priority: taskPrio,
             author: { connect: { email: session?.user?.email! } },
