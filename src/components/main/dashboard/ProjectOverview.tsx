@@ -1,13 +1,7 @@
 import { Flex, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 
-const ProjectOverview = ({
-    selectedProject,
-    setSelectedProject,
-}: {
-    selectedProject: string;
-    setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+const ProjectOverview = () => {
     return (
         <Stack
             spacing={"20"}

@@ -6,12 +6,11 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import ProjectOverview from "./ProjectOverview";
 import Projects from "./Projects";
 
 const Dashboard = () => {
-    const [selectedProject, setSelectedProject] = useState("AllProjects");
     return (
         <Flex p={"10px"} w={"100%"}>
             <Grid
@@ -26,20 +25,14 @@ const Dashboard = () => {
                     bg={useColorModeValue("white", "gray.700")}
                     borderRadius={"10px"}
                 >
-                    <Projects
-                        selectedProject={selectedProject}
-                        setSelectedProject={setSelectedProject}
-                    />
+                    <Projects />
                 </GridItem>
                 <GridItem
                     colSpan={4}
                     bg={useColorModeValue("white", "gray.700")}
                     borderRadius={"10px"}
                 >
-                    <ProjectOverview
-                        selectedProject={selectedProject}
-                        setSelectedProject={setSelectedProject}
-                    />
+                    <ProjectOverview />
                 </GridItem>
                 <GridItem
                     colSpan={1}

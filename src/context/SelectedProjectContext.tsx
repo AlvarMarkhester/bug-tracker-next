@@ -1,27 +1,45 @@
-import { createContext, useContext, useState } from "react"
+import {
+    createContext,
+    Dispatch,
+    SetStateAction,
+    useContext,
+    useState,
+} from "react";
+
+type SelectedProjectInterface = {
+    selectedProject: string;
+    setSelectedProject: Dispatch<SetStateAction<string>>;
+};
 
 const initialState = {
     selectedProject: "",
-    setSelectedProject: () => void
-}
+    setSelectedProject: () => {},
+};
 
-const SelectedProjectContext = createContext(initialState);
+const SelectedProjectContext =
+    createContext<SelectedProjectInterface>(initialState);
 
-const SelectedProjectProvider = ({ children }: { children: React.ReactNode }) => {
-    const [selectedProject, setSelectedProject] = useState("")
+const SelectedProjectProvider = ({
+    children,
+}: {
+    children: React.ReactNode;
+}) => {
+    const [selectedProject, setSelectedProject] = useState("");
 
-    const value = {selectedProject, setSelectedProject}
-    return <SelectedProjectContext.Provider value={value}>{children}</SelectedProjectContext.Provider>
+    const value = { selectedProject, setSelectedProject };
+    return (
+        <SelectedProjectContext.Provider value={value}>
+            {children}
+        </SelectedProjectContext.Provider>
+    );
+};
 
-}
-
-function useModalContext() {
-    const context = useContext(SelectedProjectContext)
+function useSelectedProjectContext() {
+    const context = useContext(SelectedProjectContext);
     if (context === undefined) {
-      throw new Error('useCount must be used within a CountProvider')
+        throw new Error("useSelectedProjectContext must be user within provider");
     }
-    return context
-  }
-  
+    return context;
+}
 
-export { SelectedProjectProvider, useModalContext }
+export { SelectedProjectProvider, useSelectedProjectContext };

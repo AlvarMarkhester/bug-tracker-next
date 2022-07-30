@@ -12,36 +12,52 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 
-const NewTaskModal = ({ isOpen, onClose, taskStatus }: { isOpen: boolean, onClose: () => void, taskStatus: string }) => {
+const NewTaskModal = ({
+    isOpen,
+    onClose,
+    taskStatus,
+}: {
+    isOpen: boolean;
+    onClose: () => void;
+    taskStatus: string;
+}) => {
     const [taskName, setTaskName] = useState("");
     const [taskDesc, setTaskDesc] = useState("");
     const [taskPrio, setTaskPrio] = useState("");
-    const [taskDeadline, setTaskDeadline] = useState("")
+    const [taskDeadline, setTaskDeadline] = useState("");
 
-    const mutation = useMutation((newTask: {
-        taskName: string,
-        taskDesc: string,
-        taskPrio: string,
-        taskDeadline: string,
-        taskStatus: string
-    }) => {
-        return axios.post('api/ticket', newTask)
-    }, {
-        onMutate: () => {
-            setTaskName("")
-            setTaskDesc("")
-            setTaskPrio("")
-            setTaskDeadline("")
+    const mutation = useMutation(
+        (newTask: {
+            taskName: string;
+            taskDesc: string;
+            taskPrio: string;
+            taskDeadline: string;
+            taskStatus: string;
+        }) => {
+            return axios.post("api/ticket", newTask);
         },
-        onSuccess: () => {
-            onClose()
+        {
+            onMutate: () => {
+                setTaskName("");
+                setTaskDesc("");
+                setTaskPrio("");
+                setTaskDeadline("");
+            },
+            onSuccess: () => {
+                onClose();
+            },
         }
-    })
+    );
     const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-        evt.preventDefault()
-        mutation.mutate({ taskName, taskDesc, taskPrio, taskDeadline, taskStatus })
-
-    }
+        evt.preventDefault();
+        mutation.mutate({
+            taskName,
+            taskDesc,
+            taskPrio,
+            taskDeadline,
+            taskStatus,
+        });
+    };
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} size="xl">
@@ -54,12 +70,30 @@ const NewTaskModal = ({ isOpen, onClose, taskStatus }: { isOpen: boolean, onClos
                         <FormControl isRequired>
                             <VStack align="start">
                                 <FormLabel>Task name:</FormLabel>
-                                <Input onChange={evt => setTaskName(evt.target.value)} value={taskName} type="name" />
+                                <Input
+                                    onChange={(evt) =>
+                                        setTaskName(evt.target.value)
+                                    }
+                                    value={taskName}
+                                    type="name"
+                                />
                                 <FormLabel>Description:</FormLabel>
-                                <Textarea onChange={evt => setTaskDesc(evt.target.value)} value={taskDesc}></Textarea>
+                                <Textarea
+                                    onChange={(evt) =>
+                                        setTaskDesc(evt.target.value)
+                                    }
+                                    value={taskDesc}
+                                ></Textarea>
                                 <FormLabel>Priority:</FormLabel>
-                                <Select onChange={evt => setTaskPrio(evt.target.value)} value={taskPrio}>
-                                    <option value="">Select priority of ticket...</option>
+                                <Select
+                                    onChange={(evt) =>
+                                        setTaskPrio(evt.target.value)
+                                    }
+                                    value={taskPrio}
+                                >
+                                    <option value="">
+                                        Select priority of ticket...
+                                    </option>
                                     <option value="low">Low</option>
                                     <option value="mid">Mid</option>
                                     <option value="high">High</option>
@@ -67,7 +101,9 @@ const NewTaskModal = ({ isOpen, onClose, taskStatus }: { isOpen: boolean, onClos
                                 </Select>
                                 <FormLabel>Deadline:</FormLabel>
                                 <Input
-                                    onChange={(evt) => setTaskDeadline(evt.target.value)}
+                                    onChange={(evt) =>
+                                        setTaskDeadline(evt.target.value)
+                                    }
                                     value={taskDeadline}
                                     placeholder="Deadline Date and Time"
                                     size="md"
@@ -83,6 +119,5 @@ const NewTaskModal = ({ isOpen, onClose, taskStatus }: { isOpen: boolean, onClos
             </ModalContent>
         </Modal>
     );
-
-}
+};
 export default NewTaskModal;

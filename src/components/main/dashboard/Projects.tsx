@@ -8,17 +8,13 @@ import {
     Divider,
     VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
+import { useSelectedProjectContext } from "../../../context/SelectedProjectContext";
 import { useProjects } from "../../../hooks/useProjects";
 import NewProjectModal from "./NewProjectModal";
 
-const Projects = ({
-    selectedProject,
-    setSelectedProject,
-}: {
-    selectedProject: string;
-    setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+const Projects = () => {
+    const { selectedProject, setSelectedProject } = useSelectedProjectContext();
     const { status, data, error, isFetching } = useProjects();
 
     const handleSelect = (project: string) => {
@@ -44,10 +40,10 @@ const Projects = ({
                 <Button
                     w="80%"
                     fontWeight="bold"
-                    onClick={() => handleSelect("AllProjects")}
+                    onClick={() => handleSelect("")}
                     size="sm"
                     color={
-                        selectedProject === "AllProjects"
+                        selectedProject === ""
                             ? "blue.500"
                             : undefined
                     }
@@ -72,7 +68,6 @@ const Projects = ({
                         </Button>
                     );
                 })}
-
             </VStack>
         </>
     );

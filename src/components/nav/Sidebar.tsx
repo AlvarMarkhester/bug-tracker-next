@@ -6,11 +6,12 @@ import {
     Button,
     Select,
     Text,
-    Divider
+    Divider,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChatIcon, WarningIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useProjects } from "../../hooks/useProjects";
+import { useSelectedProjectContext } from "../../context/SelectedProjectContext";
 
 const Sidebar = ({
     selectedPage,
@@ -39,30 +40,30 @@ const Sidebar = ({
                         setSelectedPage={setSelectedPage}
                     />
                 ))}
-                {(selectedPage === "Tickets") && <Divider />}
-                {(selectedPage === "Tickets") && <SideNavSelectProject />}
+                {selectedPage === "Tickets" && <Divider />}
+                {selectedPage === "Tickets" && <SideNavSelectProject />}
             </VStack>
         </Flex>
     );
 };
 
-
-
 const SideNavSelectProject = () => {
-    const [currentProject, setCurrentProject] = useState("")
     const { status, data, error, isFetching } = useProjects();
+    const { selectedProject, setSelectedProject } = useSelectedProjectContext();
 
     return (
         <Flex direction={"column"} width="100%">
             <Text align="center">Selected project:</Text>
             <Select
-                onChange={(evt) => setCurrentProject(evt.currentTarget.value)}
-                value={currentProject}
+                onChange={(evt) => setSelectedProject(evt.currentTarget.value)}
+                value={selectedProject}
             >
-                <option disabled value="">Select a project</option>
+                <option disabled value="">
+                    Select a project
+                </option>
                 {data?.projects?.map((data: any) => {
                     return (
-                        <option key={data.id} value={data.name}>
+                        <option key={data.id} value={data.id}>
                             {data.name}
                         </option>
                     );
@@ -72,8 +73,6 @@ const SideNavSelectProject = () => {
     );
 };
 
-
-
 const SideNavItem = ({
     text,
     icon,
@@ -82,8 +81,8 @@ const SideNavItem = ({
 }: {
     text: string;
     icon: import("@chakra-ui/system").ComponentWithAs<
-    "svg",
-    import("@chakra-ui/icon").IconProps
+        "svg",
+        import("@chakra-ui/icon").IconProps
     >;
     selectedPage: string;
     setSelectedPage: React.Dispatch<React.SetStateAction<string>>;
@@ -103,8 +102,8 @@ const SideNavItem = ({
 
 interface NavItem {
     icon: import("@chakra-ui/system").ComponentWithAs<
-    "svg",
-    import("@chakra-ui/icon").IconProps
+        "svg",
+        import("@chakra-ui/icon").IconProps
     >;
     text: string;
 }
