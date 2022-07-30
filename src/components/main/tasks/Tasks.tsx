@@ -5,23 +5,33 @@ import {
     useColorModeValue,
     Text,
     Button,
-    VStack,
     useDisclosure,
-    Textarea,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
+import { useSelectedProjectContext } from "../../../context/SelectedProjectContext";
 import NewTaskModal from "./NewTaskModal";
 
 const Tasks = () => {
+    const background = useColorModeValue("white", "gray.700");
+    const bordervalue = useColorModeValue("10px", undefined);
+    const { selectedProject } = useSelectedProjectContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [modalType, setModalType] = useState("");
+    var taskStatus = "";
     const openModal = (type: string) => {
-        setModalType(type);
+        taskStatus = type;
         onOpen();
     };
 
+    if (selectedProject === "")
+        return (
+            <Flex justify="center" w="100%" p="5rem" fontSize="4xl">
+                Please select a project..
+            </Flex>
+        );
+
     return (
         <>
+            {}
             <Flex p={"10px"} w={"100%"}>
                 <Grid
                     w="100%"
@@ -32,17 +42,16 @@ const Tasks = () => {
                     <GridItem
                         rowSpan={2}
                         colSpan={1}
-                        bg={useColorModeValue("white", "gray.700")}
+                        bg={background}
                         borderRadius={"10px"}
                     >
                         <Text
                             align={"center"}
                             bg="red.300"
+                            color={"black"}
                             borderTopRadius={"10px"}
-                            borderBottomRadius={useColorModeValue(
-                                "10px",
-                                undefined
-                            )}
+                            fontWeight="bold"
+                            borderBottomRadius={bordervalue}
                         >
                             Backlog
                         </Text>
@@ -57,17 +66,16 @@ const Tasks = () => {
                     <GridItem
                         rowSpan={2}
                         colSpan={1}
-                        bg={useColorModeValue("white", "gray.700")}
+                        bg={background}
                         borderRadius={"10px"}
                     >
                         <Text
+                            color={"black"}
                             align={"center"}
                             bg="yellow.300"
+                            fontWeight="bold"
                             borderTopRadius={"10px"}
-                            borderBottomRadius={useColorModeValue(
-                                "10px",
-                                undefined
-                            )}
+                            borderBottomRadius={bordervalue}
                         >
                             Todo
                         </Text>
@@ -82,17 +90,16 @@ const Tasks = () => {
                     <GridItem
                         rowSpan={2}
                         colSpan={1}
-                        bg={useColorModeValue("white", "gray.700")}
+                        bg={background}
                         borderRadius={"10px"}
                     >
                         <Text
+                            color={"black"}
                             align={"center"}
+                            fontWeight="bold"
                             bg="teal.400"
                             borderTopRadius={"10px"}
-                            borderBottomRadius={useColorModeValue(
-                                "10px",
-                                undefined
-                            )}
+                            borderBottomRadius={bordervalue}
                         >
                             In progress
                         </Text>
@@ -107,17 +114,16 @@ const Tasks = () => {
                     <GridItem
                         rowSpan={2}
                         colSpan={1}
-                        bg={useColorModeValue("white", "gray.700")}
+                        bg={background}
                         borderRadius={"10px"}
                     >
                         <Text
                             align={"center"}
                             bg="green.200"
+                            color={"black"}
                             borderTopRadius={"10px"}
-                            borderBottomRadius={useColorModeValue(
-                                "10px",
-                                undefined
-                            )}
+                            fontWeight="bold"
+                            borderBottomRadius={bordervalue}
                         >
                             Code Review
                         </Text>
@@ -132,17 +138,16 @@ const Tasks = () => {
                     <GridItem
                         rowSpan={2}
                         colSpan={1}
-                        bg={useColorModeValue("white", "gray.700")}
+                        bg={background}
                         borderRadius={"10px"}
                     >
                         <Text
                             align={"center"}
                             bg="green.400"
+                            color={"black"}
+                            fontWeight="bold"
                             borderTopRadius={"10px"}
-                            borderBottomRadius={useColorModeValue(
-                                "10px",
-                                undefined
-                            )}
+                            borderBottomRadius={bordervalue}
                         >
                             Finished
                         </Text>
@@ -160,7 +165,7 @@ const Tasks = () => {
                 <NewTaskModal
                     isOpen={isOpen}
                     onClose={onClose}
-                    taskStatus={modalType}
+                    taskStatus={taskStatus}
                 />
             ) : null}
         </>

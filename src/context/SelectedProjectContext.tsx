@@ -37,7 +37,9 @@ const SelectedProjectProvider = ({
 function useSelectedProjectContext() {
     const context = useContext(SelectedProjectContext);
     if (context === undefined) {
-        throw new Error("useSelectedProjectContext must be user within provider");
+        throw new Error(
+            "useSelectedProjectContext must be user within provider"
+        );
     }
     return context;
 }
