@@ -5,12 +5,13 @@ import { ModalCloseButton } from "@chakra-ui/react";
 import { ModalBody } from "@chakra-ui/react";
 import { ModalOverlay } from "@chakra-ui/react";
 import { FormControl } from "@chakra-ui/react";
-import { FormLabel, Textarea, Text, VStack } from "@chakra-ui/react";
+import { FormLabel, Textarea, VStack } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { useSelectedProjectContext } from "../../../context/SelectedProjectContext";
 
 const NewTaskModal = ({
     isOpen,
@@ -25,6 +26,7 @@ const NewTaskModal = ({
     const [taskDesc, setTaskDesc] = useState("");
     const [taskPrio, setTaskPrio] = useState("");
     const [taskDeadline, setTaskDeadline] = useState("");
+    const {selectedProject} = useSelectedProjectContext();
 
     const mutation = useMutation(
         (newTask: {
@@ -33,11 +35,18 @@ const NewTaskModal = ({
             taskPrio: string;
             taskDeadline: string;
             taskStatus: string;
+            selectedProject: string;
         }) => {
             return axios.post("api/ticket", newTask);
         },
         {
             onMutate: () => {
+                console.log({taskName: taskName,
+                    taskDesc: taskDesc,
+                    taskPrio: taskPrio,
+                    taskDeadline: taskDeadline,
+                    taskStatus: taskStatus,
+                    selectedProject: selectedProject})
                 setTaskName("");
                 setTaskDesc("");
                 setTaskPrio("");
@@ -51,11 +60,12 @@ const NewTaskModal = ({
     const newTicketSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
         mutation.mutate({
-            taskName,
-            taskDesc,
-            taskPrio,
-            taskDeadline,
-            taskStatus,
+            taskName: taskName,
+            taskDesc: taskDesc,
+            taskPrio: taskPrio,
+            taskDeadline: taskDeadline,
+            taskStatus: taskStatus,
+            selectedProject: selectedProject
         });
     };
 

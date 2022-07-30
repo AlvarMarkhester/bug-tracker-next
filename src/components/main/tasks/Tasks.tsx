@@ -7,7 +7,7 @@ import {
     Button,
     useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useSelectedProjectContext } from "../../../context/SelectedProjectContext";
 import NewTaskModal from "./NewTaskModal";
 
@@ -16,9 +16,9 @@ const Tasks = () => {
     const bordervalue = useColorModeValue("10px", undefined);
     const { selectedProject } = useSelectedProjectContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    var taskStatus = "";
+    const [taskStatus, setTaskStatus] = useState("")
     const openModal = (type: string) => {
-        taskStatus = type;
+        setTaskStatus(type)
         onOpen();
     };
 
