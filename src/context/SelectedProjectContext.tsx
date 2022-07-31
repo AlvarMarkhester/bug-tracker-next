@@ -20,7 +20,7 @@ const SelectedProjectContext =
     createContext<SelectedProjectInterface>(initialState);
 
 const SelectedProjectProvider = ({
-    children,
+    children
 }: {
     children: React.ReactNode;
 }) => {

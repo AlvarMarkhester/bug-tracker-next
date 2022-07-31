@@ -16,9 +16,9 @@ const Tasks = () => {
     const bordervalue = useColorModeValue("10px", undefined);
     const { selectedProject } = useSelectedProjectContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [taskStatus, setTaskStatus] = useState("")
+    const [taskStatus, setTaskStatus] = useState("");
     const openModal = (type: string) => {
-        setTaskStatus(type)
+        setTaskStatus(type);
         onOpen();
     };
 
@@ -45,16 +45,7 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <Text
-                            align={"center"}
-                            bg="red.300"
-                            color={"black"}
-                            borderTopRadius={"10px"}
-                            fontWeight="bold"
-                            borderBottomRadius={bordervalue}
-                        >
-                            Backlog
-                        </Text>
+                        <TaskText bordervalue={bordervalue} color="red.400">Backlog</TaskText>
                         <Button
                             width="100%"
                             height="20px"
@@ -69,16 +60,9 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <Text
-                            color={"black"}
-                            align={"center"}
-                            bg="yellow.300"
-                            fontWeight="bold"
-                            borderTopRadius={"10px"}
-                            borderBottomRadius={bordervalue}
-                        >
+                        <TaskText bordervalue={bordervalue} color="yellow.200">
                             Todo
-                        </Text>
+                        </TaskText>
                         <Button
                             width="100%"
                             height="20px"
@@ -93,16 +77,9 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <Text
-                            color={"black"}
-                            align={"center"}
-                            fontWeight="bold"
-                            bg="teal.400"
-                            borderTopRadius={"10px"}
-                            borderBottomRadius={bordervalue}
-                        >
+                        <TaskText bordervalue={bordervalue} color="teal.400">
                             In progress
-                        </Text>
+                        </TaskText>
                         <Button
                             width="100%"
                             height="20px"
@@ -117,16 +94,9 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <Text
-                            align={"center"}
-                            bg="green.200"
-                            color={"black"}
-                            borderTopRadius={"10px"}
-                            fontWeight="bold"
-                            borderBottomRadius={bordervalue}
-                        >
+                        <TaskText bordervalue={bordervalue} color="green.200">
                             Code Review
-                        </Text>
+                        </TaskText>
                         <Button
                             width="100%"
                             height="20px"
@@ -141,16 +111,9 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <Text
-                            align={"center"}
-                            bg="green.400"
-                            color={"black"}
-                            fontWeight="bold"
-                            borderTopRadius={"10px"}
-                            borderBottomRadius={bordervalue}
-                        >
+                        <TaskText bordervalue={bordervalue} color="green.400">
                             Finished
-                        </Text>
+                        </TaskText>
                         <Button
                             width="100%"
                             height="20px"
@@ -169,6 +132,28 @@ const Tasks = () => {
                 />
             ) : null}
         </>
+    );
+};
+
+const TaskText = ({
+    children,
+    bordervalue,
+    color,
+}: {
+    children: React.ReactNode;
+    bordervalue: "10px" | undefined;
+    color: string;
+}) => {
+    return (
+        <Text
+            align={"center"}
+            bg={color}
+            color={"black"}
+            borderTopRadius={"10px"}
+            borderBottomRadius={bordervalue}
+        >
+            {children}
+        </Text>
     );
 };
 
