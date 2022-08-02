@@ -13,7 +13,6 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            
             <ChakraProvider>
                 <SessionProvider session={session}>
                     <AuthWrapper>

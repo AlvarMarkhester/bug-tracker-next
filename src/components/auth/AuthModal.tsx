@@ -3,15 +3,13 @@ import {
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
-    Button,
   } from '@chakra-ui/react'
 import React from 'react'
 import { useModalContext } from '../../context/ModalContext';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
+import LoginForm from '../login/LoginForm';
+import RegisterForm from '../register/RegisterForm';
 
 const AuthModal = () => {
     const { modalOpen, onClose} = useModalContext()
