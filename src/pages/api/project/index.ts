@@ -10,7 +10,7 @@ export default async function handler(
     const session = await unstable_getServerSession(req, res, authOptions);
     switch (req.method) {
         case "POST":
-            const result = ProjectRepo.createProject(req.body, session)
+            const result = await ProjectRepo.createProject(req.body, session)
             res.send(result)
             break;
         default:

@@ -7,11 +7,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const session = await unstable_getServerSession(req, res, authOptions)
     switch (req.method) {
         case "GET":
-            const result = ProjectRepo.getProjects(session)
+            const result = await ProjectRepo.getProjects(session)
             res.json(result)
             break;
         default:
             break;
     }
-    
 }

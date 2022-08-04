@@ -1,8 +1,8 @@
 import { prisma } from "../lib/prisma";
 
 const ProjectRepo = {
-    getProjects: async (session: any) => {
-        const result = await prisma.user.findUnique({
+    getProjects: (session: any) => {
+        const result = prisma.user.findUnique({
             where: {
                 email: session?.user?.email!,
             },
@@ -12,10 +12,10 @@ const ProjectRepo = {
         });
         return result;
     },
-    createProject: async (body: any, session: any) => {
+    createProject: (body: any, session: any) => {
         const { name } = body;
 
-        const result = await prisma.project.create({
+        const result = prisma.project.create({
             data: {
                 name: name,
                 author: { connect: { email: session?.user?.email! } },
