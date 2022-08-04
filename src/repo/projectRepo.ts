@@ -1,21 +1,18 @@
-import { prisma } from '../lib/prisma';
-import type { NextApiRequest, NextApiResponse } from 'next'
-
-
+import { prisma } from "../lib/prisma";
 
 const ProjectRepo = {
-    getProjects:  async (session: any) => {
+    getProjects: async (session: any) => {
         const result = await prisma.user.findUnique({
             where: {
-                email: session?.user?.email!
+                email: session?.user?.email!,
             },
             select: {
-                projects: true
-            }
+                projects: true,
+            },
         });
         return result;
     },
-    createProject:  async (body: any, session: any) => {
+    createProject: async (body: any, session: any) => {
         const { name } = body;
 
         const result = await prisma.project.create({
@@ -24,7 +21,7 @@ const ProjectRepo = {
                 author: { connect: { email: session?.user?.email! } },
             },
         });
-        return result
-    }
-}
+        return result;
+    },
+};
 export default ProjectRepo;
