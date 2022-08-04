@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 
 const ProjectRepo = {
-    getProjects:  async (req: NextApiRequest, res: NextApiResponse, session: any) => {
+    getProjects:  async (session: any) => {
         const result = await prisma.user.findUnique({
             where: {
                 email: session?.user?.email!
@@ -13,10 +13,10 @@ const ProjectRepo = {
                 projects: true
             }
         });
-        res.json(result);
+        return result;
     },
-    createProject:  async (req: NextApiRequest, res: NextApiResponse, session: any) => {
-        const { name } = req.body;
+    createProject:  async (body: any, session: any) => {
+        const { name } = body;
 
         const result = await prisma.project.create({
             data: {
@@ -24,7 +24,7 @@ const ProjectRepo = {
                 author: { connect: { email: session?.user?.email! } },
             },
         });
-        res.json(result);
+        return result
     }
 }
 export default ProjectRepo;
