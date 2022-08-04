@@ -45,7 +45,9 @@ const Tasks = () => {
                         bg={background}
                         borderRadius={"10px"}
                     >
-                        <TaskText bordervalue={bordervalue} color="red.400">Backlog</TaskText>
+                        <TaskText bordervalue={bordervalue} color="red.400">
+                            Backlog
+                        </TaskText>
                         <Button
                             width="100%"
                             height="20px"
