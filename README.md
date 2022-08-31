@@ -1,5 +1,5 @@
-Work in progress, stay tuned! Will be awesome and useful software <br/>
-DEV Stack: NextJS, Typescript, Prisma, PostegreSQL, Next Auth
+Bug Tracker for project management. <br/>
+Stack: NextJS, Typescript, Prisma, PostegreSQL, Next Auth
 
 <div>
   <img width="300px" src="https://user-images.githubusercontent.com/45149278/178851974-b42f0a49-d2e6-4ff7-b22f-c9a2b8943e15.png"/>
