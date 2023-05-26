@@ -1,4 +1,5 @@
 Bug Tracker for project management. <br/>
+Not production ready at all, it was just a fun project that I never had time to finish, no tests, no docs. Just wanted to try out a modern stack.
 Stack: NextJS, Typescript, Prisma, PostegreSQL, Next Auth
 
 <div>
